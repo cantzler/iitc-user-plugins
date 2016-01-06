@@ -3,9 +3,9 @@
 // @name           IITC plugin: highlight portals supply base
 // @category       Highlighter
 // @version        0.0.1.20151025.000001
-// @namespace      https://github.com/fl0o0l/iitc
-// @updateURL      https://github.com/fl0o0l/iitc/raw/master/portal-highlighter-supply-base.user.js
-// @downloadURL    https://github.com/fl0o0l/iitc/raw/master/portal-highlighter-supply-base.user.js
+// @namespace      https://github.com/cantzler
+// @updateURL      https://github.com/cantzler/iitc-user-plugins/raw/master/portal-highlighter-supply-base.user.js
+// @downloadURL    https://github.com/cantzler/iitc-user-plugins/raw/master/portal-highlighter-supply-base.user.js
 // @include        https://www.ingress.com/intel*
 // @include        http://www.ingress.com/intel*
 // @match          https://www.ingress.com/intel*
@@ -21,7 +21,7 @@ if(typeof window.plugin !== 'function') window.plugin = function() {};
 //PLUGIN AUTHORS: writing a plugin outside of the IITC build environment? if so, delete these lines!!
 //(leaving them in place might break the 'About IITC' page or break update checks)
 plugin_info.buildName = 'local';
-plugin_info.dateTimeVersion = '20151025.000001';
+plugin_info.dateTimeVersion = '20160106.000001';
 plugin_info.pluginId = 'portal-highlighter-supply-base';
 //END PLUGIN AUTHORS NOTE
 
