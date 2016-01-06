@@ -1,5 +1,5 @@
 // ==UserScript==
-// @id             iitc-plugin-highlight-portals-supply-base@fl0o0l
+// @id             iitc-plugin-highlight-portals-supply-base@cantzler
 // @name           IITC plugin: highlight portals supply base
 // @category       Highlighter
 // @version        0.0.1.20160106.000001
@@ -12,7 +12,7 @@
 // @match          http://www.ingress.com/intel*
 // @grant          none
 // ==/UserScript==
-
+// Kindly stolen and modified from src: https://github.com/fl0o0l/iitc/raw/master/portal-highlighter-supply-base.user.js
 
 function wrapper(plugin_info) {
 // ensure plugin framework is there, even if iitc is not yet loaded
