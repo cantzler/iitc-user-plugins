@@ -2,7 +2,7 @@
 // @id             iitc-plugin-highlight-portals-supply-base@fl0o0l
 // @name           IITC plugin: highlight portals supply base
 // @category       Highlighter
-// @version        0.0.1.20151025.000001
+// @version        0.0.1.20160106.000001
 // @namespace      https://github.com/cantzler
 // @updateURL      https://github.com/cantzler/iitc-user-plugins/raw/master/portal-highlighter-supply-base.user.js
 // @downloadURL    https://github.com/cantzler/iitc-user-plugins/raw/master/portal-highlighter-supply-base.user.js
