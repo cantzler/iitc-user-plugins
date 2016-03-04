@@ -2,7 +2,7 @@
 // @id             iitc-plugin-highlight-portals-supply-base@cantzler
 // @name           IITC plugin: highlight portals supply base
 // @category       Highlighter
-// @version        0.0.2.20160303.000001
+// @version        0.0.2.20160303.000002
 // @namespace      https://github.com/cantzler
 // @updateURL      https://github.com/cantzler/iitc-user-plugins/raw/master/portal-highlighter-supply-base.user.js
 // @downloadURL    https://github.com/cantzler/iitc-user-plugins/raw/master/portal-highlighter-supply-base.user.js
@@ -48,7 +48,7 @@ function wrapper(plugin_info) {
 
     // First make sure we want to check this portal (is a valid portal and captured)
     // TODO: currently this filters to ENL-only, but it can be interesting for RES. Consider making it a separate highlight mode.
-    if (guid && portal.options.team !== undefined && p_opt.team !== TEAM_ENL && p_dat.resCount !== undefined && p_dat.resCount >= 1) {
+    if (guid && portal.options.team !== undefined && p_opt.team == TEAM_ENL && p_dat.resCount !== undefined && p_dat.resCount >= 1) {
       var detail = portalDetail.get(guid);
       // if we have details
       if (detail) {
@@ -160,15 +160,17 @@ function wrapper(plugin_info) {
     }
   }
   var setup = function() {
-    window.addPortalHighlighter('supply base', window.plugin.portalHighlighterPortalsSupplyBase.highlighter);
+    window.addPortalHighlighter('Supply Base', window.plugin.portalHighlighterPortalsSupplyBase.highlighter);
   }
 
   // add a portalDetailLoaded hook to refresh the portal
   addHook('portalDetailLoaded', function(data) {
-    // this is hacky, but I think it will work. Call the "regular" function (which takes portal data) using the GUID from the hook.
-    // this will request the details from the cache and if not found it will re-request the details from IITC
-    // TODO: how do we avoid an infiniate loop of detail requests?
-    window.plugin.portalHighlighterPortalsSupplyBase.colorPortal(portals[data.guid])
+    if (window._current_highlighter == "Supply Base") {
+      // this is hacky, but I think it will work. Call the "regular" function (which takes portal data) using the GUID from the hook.
+      // this will request the details from the cache and if not found it will re-request the details from IITC
+      // TODO: how do we avoid an infiniate loop of detail requests?
+      window.plugin.portalHighlighterPortalsSupplyBase.colorPortal(portals[data.guid])
+    }
   });
 
   // PLUGIN END //////////////////////////////////////////////////////////
