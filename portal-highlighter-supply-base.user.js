@@ -47,7 +47,8 @@ function wrapper(plugin_info) {
     var myFillOpacity;
 
     // First make sure we want to check this portal (is a valid portal and captured)
-    if (guid && portal.options.team !== undefined && p_opt.team !== TEAM_NONE && p_dat.resCount !== undefined && p_dat.resCount >= 1) {
+    // TODO: currently this filters to ENL-only, but it can be interesting for RES. Consider making it a separate highlight mode.
+    if (guid && portal.options.team !== undefined && p_opt.team !== TEAM_ENL && p_dat.resCount !== undefined && p_dat.resCount >= 1) {
       var detail = portalDetail.get(guid);
       // if we have details
       if (detail) {
@@ -142,7 +143,7 @@ function wrapper(plugin_info) {
         portalDetail.request(guid);
         return;
       }
-    } else { // If this portal is uncaptured don't color it
+    } else { // If this portal is RES or uncaptured don't color it
       myFillColor = '#ffffff';
       myFillOpacity = 0.0;
       myBorderColor = '#ffffff';
