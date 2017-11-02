@@ -45,6 +45,9 @@ function wrapper(plugin_info) {
     var myBorderOpacity;
     var myFillColor;
     var myFillOpacity;
+    var myBorderRadius;
+    var myBorderWeight;
+    var myBorderDash;
 
     // First make sure we want to check this portal (is a valid portal and captured)
     // TODO: currently this filters to ENL-only, but it can be interesting for RES. Consider making it a separate highlight mode.
@@ -58,26 +61,31 @@ function wrapper(plugin_info) {
           var shieldScore = 0.01;
           var mhScore = 0.01;
           var hsScore = 0.01;
+          var itoScore = 0.10;
           var tmpValue = 0;
+          var modCount = 0;
           //MOD Tabulation
           $.each(detail.mods, function(ind, mod) {
             if (mod && mod !== undefined && mod !== null && mod.name !== undefined && mod.rarity !== undefined) {
               switch (mod.rarity) {
                 case 'VERY_RARE':
                   tmpValue = 0.5;
+                  modCount += 1;
                   break;
                 case 'RARE':
                   tmpValue = 0.25;
+                  modCount += 1;
                   break;
                 case 'COMMON':
                   tmpValue = 0.1;
+                  modCount += 1;
                   break;
                 default:
                   tmpValue = 0;
               }
               switch (mod.name) {
                 case 'AXA Shield':
-                  shieldScore += 0.5;
+                  shieldScore += 0.3; //0.5;
                   break;
                 case 'Portal Shield':
                   shieldScore += (tmpValue / 2); // shield score needs knocked down to account for AXA
@@ -87,6 +95,12 @@ function wrapper(plugin_info) {
                   break;
                 case 'Multi-hack':
                   mhScore += tmpValue;
+                  break;
+                case 'Ito En Transmuter (-)':
+                  itoScore += tmpValue;
+                  break;
+                case 'Ito En Transmuter (+)':
+                  itoScore += (tmpValue / 2); // yaknow, its a ploose
                   break;
               }
             }
@@ -122,6 +136,7 @@ function wrapper(plugin_info) {
           //            1 RMH  = 0.25 (orange)
           //            2 CMH  = 0.2  (yellow)
           //            1 CMH  = 0.1  (yellow)
+          mhScore += itoScore; // it just gives extra stuff, like a free... hack... err a multi... hack?
           if (mhScore > 0.5) {
             myFillColor = '#ff0000';
             //console.log('WARNING "' + data.portal.options.data.title + '"');
@@ -137,6 +152,26 @@ function wrapper(plugin_info) {
           // Heat Sink Score to Fill Opacity
           // see MH table for color, then add 0.5
           myFillOpacity = Math.min(0.5 + hsScore, 1);
+
+          // Gear Payout to Border
+          // examples:  1 ITO+ = 0.5   (red)
+          //   1 ITO- + 1 VRMH = 1.0   (red)
+          //   2 ITO- + 1 VRMH = 1.5   (red)
+          //            4 RMH  = 1.0   (red)
+          //            4 CMH  = 0.4   (red)
+          var gear_payout = Math.floor(2*(hsScore + mhScore + itoScore));
+          myBorderRadius = 10 + 4*gear_payout;
+          myBorderWeight = 5;// + 2*gear_payout;
+
+          if (modCount == 4) {
+              myBorderDash = "10,0";
+          } else if (modCount == 3) {
+              myBorderDash = "7,5";
+          } else if (modCount == 2) {
+              myBorderDash = "5,7";
+          } else {
+              myBorderDash = "2,10";
+          }
         }
       } else {
         // otherwise request the details
@@ -155,7 +190,10 @@ function wrapper(plugin_info) {
         fillColor: myFillColor,
         fillOpacity: myFillOpacity,
         color: myBorderColor,
-        opacity: myBorderOpacity
+        opacity: myBorderOpacity,
+        weight: myBorderWeight,
+        dashArray: myBorderDash,
+        radius: myBorderRadius,
       });
     }
   }
