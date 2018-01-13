@@ -24,8 +24,9 @@
 // @category       Layer
 // @version        0.11.1.20150409.2045
 // @namespace      https://github.com/jonatkins/ingress-intel-total-conversion
-// @updateURL      http://steeltoad.com/mutracker.meta.js
-// @downloadURL    http://steeltoad.com/mutracker.user.js
+// @namespace      https://github.com/cantzler
+// @updateURL      https://github.com/cantzler/iitc-user-plugins/raw/master/mutracker.user.js
+// @downloadURL    https://github.com/cantzler/iitc-user-plugins/raw/master/mutracker.user.js
 // @description    [steeltoad-2015-04-09-2045] Modified version of player tracker that also tracks mu of fields created or destroyed. Does not request chat data on its own, even if that would be useful.
 // @include        https://www.ingress.com/intel*
 // @include        http://www.ingress.com/intel*
